@@ -12,7 +12,7 @@ class Point:
         return round(math.hypot(self.x - other.x, self.y - other.y), 2)
 
     def distance_from_origin(self) -> float:
-        return round(math.hypot(self.x, self.y), 2)
+        return self.r
 
     def which_quadrant(self) -> int:
         if self.x > 0 and self.y > 0:
