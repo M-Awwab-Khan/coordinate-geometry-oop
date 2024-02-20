@@ -12,6 +12,11 @@ class Point:
         return self.__dict__[f"_{name}"]
 
     def __setattr__(self, name, value):
+        if name == 'mode':
+            if value not in ['cartesian', 'polar']:
+                raise ValueError('Invalide mode of representation')
+        elif type(value) != int and type(value) != float:
+            raise TypeError('Invalid type of argument')
         self.__dict__[f"_{name}"] = value
 
     def calculate_distance(self, other: "Point") -> float:
@@ -42,10 +47,14 @@ class Point:
     def __eq__(self, other: "Point") -> bool:
         return (self.x == other.x) and (self.y == other.y)
     
+    def mirror_x(self) -> "Point":
+        return Point(self.x, -self.y, mode=self.mode)
     
+    def mirror_y(self) -> "Point":
+        return Point(-self.x, self.y, mode=self.mode)
 
     @classmethod
-    def from_polar_coords(cls, r, θ):
+    def from_polar_coords(cls, r, θ) -> "Point":
         return cls(r * math.cos(θ), r * math.sin(θ), mode='polar')
     
     def __str__(self) -> str:
