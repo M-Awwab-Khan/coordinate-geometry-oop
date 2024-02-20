@@ -5,8 +5,7 @@ class Point:
         self.x = x
         self.y = y
         self.mode = mode
-        self.r = round(math.hypot(self.x, self.y), 2)
-        self.θ = round(math.atan(self.y / self.x), 2)
+        self.set_polar()
 
     def __getattr__(self, name: str):
         return self.__dict__[f"_{name}"]
@@ -14,10 +13,13 @@ class Point:
     def __setattr__(self, name, value):
         if name == 'mode':
             if value not in ['cartesian', 'polar']:
-                raise ValueError('Invalide mode of representation')
-        elif type(value) != int and type(value) != float:
+                raise ValueError('Invalid mode of representation')
+            else:
+                self.__dict__[f"_{name}"] = value
+        elif name in ['x', 'y', 'θ', 'r'] and type(value) not in [int, float]:
             raise TypeError('Invalid type of argument')
-        self.__dict__[f"_{name}"] = value
+        else:
+            self.__dict__[f"_{name}"] = value
 
     def calculate_distance(self, other: "Point") -> float:
         self.validate_point_type()
@@ -26,6 +28,13 @@ class Point:
     def distance_from_origin(self) -> float:
         return self.r
 
+    def set_polar(self):
+        if self.x == 0:
+            # Handle division by zero when y is zeros
+            self.θ = round(math.pi / 2 if self.y > 0 else -math.pi / 2, 2)
+        else:
+            self.θ = round(math.atan(self.y / self.x), 2)
+        self.r = round(math.hypot(self.x, self.y), 2)
     def which_quadrant(self) -> int:
         if self.x > 0 and self.y > 0:
             return 1
