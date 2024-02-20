@@ -30,6 +30,11 @@ class Point:
     def __mul__(self, k: int) -> "Point":
         return Point(self.x * k, self.y * k)
     
+    def __eq__(self, other: "Point") -> bool:
+        return (self.x == other.x) and (self.y == other.y)
+    
+    
+
     @classmethod
     def from_polar_coords(cls, r, theta):
         return cls(r * math.cos(theta), r * math.sin(theta))
