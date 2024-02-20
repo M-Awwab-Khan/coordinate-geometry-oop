@@ -20,6 +20,7 @@ class Point:
         self.__dict__[f"_{name}"] = value
 
     def calculate_distance(self, other: "Point") -> float:
+        self.validate_point_type()
         return round(math.hypot(self.x - other.x, self.y - other.y), 2)
 
     def distance_from_origin(self) -> float:
@@ -36,15 +37,18 @@ class Point:
             return 4
 
     def __add__(self, other: "Point") -> "Point":
+        self.validate_point_type(other)
         return Point(self.x + other.x, self.y + other.y, mode=self.mode)
     
     def __sub__(self, other: "Point") -> "Point":
+        self.validate_point_type(other)
         return Point(self.x - other.x, self.y - other.y, mode=self.mode)
     
     def __mul__(self, k: int) -> "Point":
         return Point(self.x * k, self.y * k, mode=self.mode)
     
     def __eq__(self, other: "Point") -> bool:
+        self.validate_point_type(other)
         return (self.x == other.x) and (self.y == other.y)
     
     def mirror_x(self) -> "Point":
@@ -56,6 +60,10 @@ class Point:
     @classmethod
     def from_polar_coords(cls, r, θ) -> "Point":
         return cls(r * math.cos(θ), r * math.sin(θ), mode='polar')
+
+    def validate_point_type(self, obj):
+        if type(obj) != Point:
+            raise TypeError("Type of object is not Point")
     
     def __str__(self) -> str:
         if self.mode == 'cartesian':
