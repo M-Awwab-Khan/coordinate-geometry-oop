@@ -30,5 +30,9 @@ class Point:
     def __mul__(self, k: int) -> "Point":
         return Point(self.x * k, self.y * k)
     
+    @classmethod
+    def from_polar_coords(cls, r, theta):
+        return cls(r * math.cos(theta), r * math.sin(theta))
+    
     def __str__(self) -> str:
         return f"Point({self.x}, {self.y})"
