@@ -8,6 +8,12 @@ class Point:
         self.r = round(math.hypot(self.x, self.y), 2)
         self.θ = round(math.atan(self.y / self.x), 2)
 
+    def __getattr__(self, name: str):
+        return self.__dict__[f"_{name}"]
+
+    def __setattr__(self, name, value):
+        self.__dict__[f"_{name}"] = value
+
     def calculate_distance(self, other: "Point") -> float:
         return round(math.hypot(self.x - other.x, self.y - other.y), 2)
 
