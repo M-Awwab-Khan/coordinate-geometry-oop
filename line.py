@@ -56,6 +56,16 @@ class Line:
             mode = 'vertical'
         return cls(y_interept, slope, mode=mode)
 
-    
+    def __str__(self) -> str:
+        if self.mode == 'slope_intercept':
+            return f"y = {self.slope}x + {self.y_intercept}"
+        elif self.mode == 'standard':
+            return f"{self.slope}x - y = {-self.y_intercept}"
+        elif self.mode == 'intercept':
+            return f"x/{self.x_intercept} + y/{self.y_intercept} = 1"
+        elif self.mode == 'horizontal':
+            return f"y = {self.y_intercept}"
+        elif self.mode == 'vertical':
+            return f"x = {self.x_intercept}"
         
 
