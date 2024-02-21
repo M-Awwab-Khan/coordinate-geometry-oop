@@ -1,9 +1,10 @@
 import math
 from point import Point
+from typing import Union
 
 class Line:
 
-    def __init__(self, y_intercept: int | float, slope: int | float, mode: str = 'slope_intercept') -> None:
+    def __init__(self, y_intercept: Union[int, float], slope: Union[int, float], mode: str = 'slope_intercept') -> None:
         self.y_intercept = y_intercept
         self.slope = slope
         self.mode = mode
@@ -27,12 +28,12 @@ class Line:
         return cls(y_intercept, slope, mode=mode)
     
     @classmethod
-    def from_point_slope(cls, p: Point, slope: int | float) -> 'Line':
+    def from_point_slope(cls, p: Point, slope: Union[int, float]) -> 'Line':
         y_intercept = p.y - (slope * p.x)
         return cls(y_intercept, slope, mode='point_slope')
     
     @classmethod
-    def from_interepts(cls, x_intercept: int | float, y_intercept: int | float) -> 'Line':
+    def from_intercepts(cls, x_intercept: Union[int, float], y_intercept: Union[int, float]) -> 'Line':
         if x_intercept == 0:
             slope = math.inf
             mode = 'vertical'
@@ -45,7 +46,7 @@ class Line:
         return cls(y_intercept, slope, mode=mode)
     
     @classmethod
-    def from_standard(cls, a: int | float, b: int | float, c: int | float) -> 'Point':
+    def from_standard(cls, a: Union[int, float], b: Union[int, float], c: Union[int, float]) -> 'Point':
         if b != 0:
             slope = -a / b
             y_interept = -c / b
