@@ -11,6 +11,7 @@ class Line:
             self.x_intercept = -(self.y_intercept / self.slope)
         else:
             self.x_intercept = None
+            self.mode = 'horizontal'
 
     @classmethod
     def from_two_points(cls, p1: Point, p2: Point) -> 'Line':
@@ -42,5 +43,19 @@ class Line:
             slope = -(y_intercept / x_intercept)
             mode = 'intercepts'
         return cls(y_intercept, slope, mode=mode)
+    
+    @classmethod
+    def from_standard(cls, a: int | float, b: int | float, c: int | float) -> 'Point':
+        if b != 0:
+            slope = -a / b
+            y_interept = -c / b
+            mode = 'standard'
+        else:
+            y_interept = None
+            slope = math.inf
+            mode = 'vertical'
+        return cls(y_interept, slope, mode=mode)
+
+    
         
 
