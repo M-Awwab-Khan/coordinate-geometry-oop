@@ -45,6 +45,10 @@ class Point:
         elif self.x > 0 and self.y < 0:
             return 4
 
+    def validate_other(obj):
+        if type(obj) != Point:
+            raise TypeError('Invalid type of object.')
+            
     def __add__(self, other: "Point") -> "Point":
         self.validate_point_type(other)
         return Point(self.x + other.x, self.y + other.y, mode=self.mode)
