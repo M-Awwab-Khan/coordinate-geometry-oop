@@ -1,7 +1,8 @@
 import math
+from typing import Union
 
 class Point:
-    def __init__(self, x: int = 0, y: int = 0, mode='cartesian') -> None:
+    def __init__(self, x: Union[int, float] = 0, y: Union[int, float] = 0, mode='cartesian') -> None:
         self.x = x
         self.y = y
         self.mode = mode
@@ -57,7 +58,7 @@ class Point:
         self.validate_point_type(other)
         return Point(self.x - other.x, self.y - other.y, mode=self.mode)
     
-    def __mul__(self, k: int) -> "Point":
+    def __mul__(self, k: Union[int, float]) -> "Point":
         return Point(self.x * k, self.y * k, mode=self.mode)
     
     def __eq__(self, other: "Point") -> bool:
