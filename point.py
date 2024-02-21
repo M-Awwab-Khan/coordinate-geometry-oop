@@ -69,6 +69,9 @@ class Point:
     
     def mirror_y(self) -> "Point":
         return Point(-self.x, self.y, mode=self.mode)
+    
+    def mid_point(self, other: "Point") -> "Point":
+        return Point((self.x + other.x) / 2, (self.y + other.y) / 2, mode=self.mode)
 
     @classmethod
     def from_polar_coords(cls, r, θ) -> "Point":
