@@ -74,6 +74,14 @@ class Line:
 
     def check_intersection(self, l: 'Line') -> bool:
         return self.slope != l.slope
+
+    def intersection_point(self, l: 'Line') -> Union[Point, str]:
+        if self.check_intersection(l):
+            x = (l.y_intercept - self.y_intercept) / (self.slope - l.slope)
+            y = (self.slope * x) + self.y_intercept
+            return Point(x, y, mode='cartesian')
+        else:
+            return 'Lines do not intersect'
         
     def __str__(self) -> str:
         if self.mode == 'slope_intercept':
