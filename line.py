@@ -72,6 +72,9 @@ class Line:
     def inclination(self) -> Union[int, float]:
         return round(math.atan(self.slope), 2)
 
+    def check_intersection(self, l: 'Line') -> bool:
+        return self.slope != l.slope
+        
     def __str__(self) -> str:
         if self.mode == 'slope_intercept':
             return f"y = {self.slope}x + {self.y_intercept}"
