@@ -68,6 +68,9 @@ class Line:
     
     def is_perpendicular(self, l: 'Line') -> bool:
         return self.slope == - (1 / l.slope)
+    
+    def inclination(self) -> Union[int, float]:
+        return round(math.atan(self.slope), 2)
 
     def __str__(self) -> str:
         if self.mode == 'slope_intercept':
