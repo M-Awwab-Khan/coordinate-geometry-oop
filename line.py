@@ -63,6 +63,12 @@ class Line:
     def is_point_on_line(self, p: Point) -> bool:
         return p.y - (self.slope * p.x) - self.y_intercept == 0
     
+    def is_parallel(self, l: 'Line') -> bool:
+        return self.slope == l.slope
+    
+    def is_perpendicular(self, l: 'Line') -> bool:
+        return self.slope == - (1 / l.slope)
+
     def __str__(self) -> str:
         if self.mode == 'slope_intercept':
             return f"y = {self.slope}x + {self.y_intercept}"
