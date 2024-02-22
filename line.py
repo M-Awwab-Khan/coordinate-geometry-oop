@@ -56,6 +56,11 @@ class Line:
             slope = math.inf
             mode = 'vertical'
         return cls(y_interept, slope, mode=mode)
+    
+    @staticmethod
+    def are_concurrent(l1: 'Line', l2: 'Line', l3: 'Line') -> bool:
+        det = (l1.slope * (l3.y_intercept - l2.y_intercept)) - (l2.slope * (l3.y_intercept - l1.y_intercept)) + (l3.slope * (l2.y_intercept - l1.y_intercept))
+        return det == 0
 
     def find_slope(self) -> Union[int, float]:
         return self.slope
