@@ -30,7 +30,7 @@ class Line:
     @classmethod
     def from_point_slope(cls, p: Point, slope: Union[int, float]) -> 'Line':
         y_intercept = p.y - (slope * p.x)
-        return cls(y_intercept, slope, mode='point_slope')
+        return cls(y_intercept, slope, mode='slope_intercept')
     
     @classmethod
     def from_intercepts(cls, x_intercept: Union[int, float], y_intercept: Union[int, float]) -> 'Line':
@@ -56,6 +56,10 @@ class Line:
             slope = math.inf
             mode = 'vertical'
         return cls(y_interept, slope, mode=mode)
+
+    def find_slope(self) -> Union[int, float]:
+        return self.slope
+    
 
     def __str__(self) -> str:
         if self.mode == 'slope_intercept':
